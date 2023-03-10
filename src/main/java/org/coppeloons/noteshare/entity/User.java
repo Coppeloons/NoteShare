@@ -1,11 +1,11 @@
 package org.coppeloons.noteshare.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -19,9 +19,6 @@ public class User {
 	private String name;
 
 	private String username;
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Note> notes = new HashSet<>();
 
 	@Override
 	public boolean equals(Object o) {
