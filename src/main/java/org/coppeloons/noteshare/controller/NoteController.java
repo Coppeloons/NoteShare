@@ -18,36 +18,40 @@ public class NoteController {
     }
 
     @PostMapping
-    void addNote(@RequestBody Note note){
+    void addNote(@RequestBody Note note) {
         noteRepo.save(note);
     }
+
     @GetMapping("/{id}")
-    Note getNote(@PathVariable Long id){
+    Note getNote(@PathVariable Long id) {
         return noteRepo.findById(id).orElseThrow();
     }
+
     @GetMapping
-    List<Note> getAllNotes(){
+    List<Note> getAllNotes() {
         return noteRepo.findAll();
     }
+
     @DeleteMapping("/{id}")
-    void deleteNote(@PathVariable Long id){
+    void deleteNote(@PathVariable Long id) {
         noteRepo.deleteById(id);
     }
 
-    @PatchMapping(path= "/{id}", consumes = "text/plain; charset: utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
+//TODO:: Doesn't work
+/*    @PatchMapping(path= "/{id}", consumes = "text/plain; charset: utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     Note editNote(@PathVariable Long id, @RequestBody String body) {
         noteRepo.findById(id).orElseThrow().setText(body);
         return noteRepo.findById(id).orElseThrow();
-    }
+    }*/
 
-    @PutMapping("/{id}")
+//TODO:: Doesn't work
+/*    @PutMapping("/{id}")
     Note replaceNote(@PathVariable Long id, @RequestBody Note note) {
         var existingNote = noteRepo.findById(id).orElseThrow();
         existingNote.setUsers(note.getUsers());
         existingNote.setTitle(note.getTitle());
         existingNote.setText(note.getText());
-
         return noteRepo.findById(id).orElseThrow();
-    }
+    }*/
 
 }
