@@ -19,7 +19,7 @@ public class Note {
 
     private String document;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
 
