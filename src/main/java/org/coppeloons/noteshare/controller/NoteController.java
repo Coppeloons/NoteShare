@@ -23,5 +23,9 @@ public class NoteController {
     List<Note> getAllNotes(){
         return noteRepo.findAll();
     }
+    @DeleteMapping("/{id}")
+    void deleteNote(@PathVariable Long id){
+        noteRepo.deleteById(id);
+    }
 
 }
