@@ -7,8 +7,6 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Entity
 @Getter
 @Setter
@@ -18,16 +16,16 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	String name;
+	private String name;
 
-	String username;
+	private String username;
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		User user = (User) o;
-		return Objects.equals(id, user.id);
+		return id.equals(user.id);
 	}
 
 	@Override
