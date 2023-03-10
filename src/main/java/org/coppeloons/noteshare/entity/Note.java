@@ -15,9 +15,9 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String documentName;
+    private String title;
 
-    private String document;
+    private String text;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
