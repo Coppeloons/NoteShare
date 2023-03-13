@@ -38,6 +38,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     User replaceUser(@PathVariable Long id, @RequestBody User user) {
+        user.setId(id);
         userRepo.save(user);
         return userRepo.findById(id).orElseThrow();
     }
