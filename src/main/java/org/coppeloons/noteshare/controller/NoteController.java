@@ -52,7 +52,7 @@ public class NoteController {
             existingNote.setTitle(note.getTitle());
         if (note.getText() != null)
             existingNote.setText(note.getText());
-        if (note.getUsers() != null)
+        if (!note.getUsers().isEmpty())
             existingNote.setUsers(note.getUsers());
         noteRepo.save(existingNote);
         return noteRepo.findById(id).orElseThrow();
