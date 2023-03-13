@@ -22,7 +22,6 @@ public class Note {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
