@@ -60,6 +60,7 @@ public class NoteController {
 
     @PutMapping("/{id}")
     Note replaceNote(@PathVariable Long id, @RequestBody Note note) {
+        note.setId(id);
         noteRepo.save(note);
         return noteRepo.findById(id).orElseThrow();
     }
