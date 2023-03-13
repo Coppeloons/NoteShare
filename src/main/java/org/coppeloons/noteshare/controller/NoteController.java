@@ -37,21 +37,30 @@ public class NoteController {
         noteRepo.deleteById(id);
     }
 
-//TODO:: Doesn't work
-/*    @PatchMapping(path= "/{id}", consumes = "text/plain; charset: utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
-    Note editNote(@PathVariable Long id, @RequestBody String body) {
-        noteRepo.findById(id).orElseThrow().setText(body);
-        return noteRepo.findById(id).orElseThrow();
-    }*/
-
-//TODO:: Doesn't work
-/*    @PutMapping("/{id}")
-    Note replaceNote(@PathVariable Long id, @RequestBody Note note) {
+    @PatchMapping(path = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
+    Note updateText(@PathVariable Long id, @RequestBody String body) {
         var existingNote = noteRepo.findById(id).orElseThrow();
-        existingNote.setUsers(note.getUsers());
-        existingNote.setTitle(note.getTitle());
-        existingNote.setText(note.getText());
+        existingNote.setText(body);
+        noteRepo.save(existingNote);
         return noteRepo.findById(id).orElseThrow();
-    }*/
+    }
 
+    @PatchMapping("/{id}")
+    Note updateNote(@PathVariable Long id, @RequestBody Note note) {
+        var existingNote = noteRepo.findById(id).orElseThrow();
+        if (note.getTitle() != null)
+            existingNote.setTitle(note.getTitle());
+        if (note.getText() != null)
+            existingNote.setText(note.getText());
+        if (note.getUsers() != null)
+            existingNote.setUsers(note.getUsers());
+        noteRepo.save(existingNote);
+        return noteRepo.findById(id).orElseThrow();
+    }
+
+    @PutMapping("/{id}")
+    Note replaceNote(@PathVariable Long id, @RequestBody Note note) {
+        noteRepo.save(note);
+        return noteRepo.findById(id).orElseThrow();
+    }
 }
