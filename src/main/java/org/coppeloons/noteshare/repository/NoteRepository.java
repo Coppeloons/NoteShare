@@ -9,6 +9,6 @@ import java.util.List;
 public interface NoteRepository extends ListCrudRepository<Note, Long> {
 
     @Override
-    @EntityGraph(value = "Organization.persons")
+    @EntityGraph(value = "Note.users")
     List<Note> findAll();
 }
