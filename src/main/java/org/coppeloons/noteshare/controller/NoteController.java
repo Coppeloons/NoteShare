@@ -2,23 +2,30 @@ package org.coppeloons.noteshare.controller;
 
 import org.coppeloons.noteshare.entity.Note;
 import org.coppeloons.noteshare.repository.NoteRepository;
+import org.coppeloons.noteshare.repository.UserRepository;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/notes")
 public class NoteController {
 
     NoteRepository noteRepo;
+    UserRepository userRepo;
 
-    public NoteController(NoteRepository noteRepo) {
+    public NoteController(NoteRepository noteRepo, UserRepository userRepo) {
         this.noteRepo = noteRepo;
+        this.userRepo = userRepo;
     }
 
     @PostMapping
     void addNote(@RequestBody Note note) {
+        var copyOfCountries = Set.copyOf(note.getUsers());
+        note.getUsers().clear();
+        note.getUsers().addAll(userRepo.saveAll(copyOfCountries));
         noteRepo.save(note);
     }
 
