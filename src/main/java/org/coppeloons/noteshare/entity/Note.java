@@ -10,6 +10,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@NamedEntityGraph(name = "Note.users",
+        attributeNodes = @NamedAttributeNode("users"))
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +21,7 @@ public class Note {
 
     private String text;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<User> users = new HashSet<>();
 
     @Override
