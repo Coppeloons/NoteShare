@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>NoteShare-Users</title>
+</head>
+<body>
+<h1>
+  NoteShare Users
+</h1>
+<table>
+  <tr>
+    <td th:text="Id"></td>
+    <td th:text="Username"></td>
+    <td th:text="Name"></td>
+  </tr>
+  <tr th:each="user: ${allUsers}">
+    <td th:text="${user.getId()}"></td>
+    <td th:text="${user.getUsername()}"></td>
+    <td th:text="${user.getName()}"></td>
+  </tr>
+</table>
+</body>
+</html>
