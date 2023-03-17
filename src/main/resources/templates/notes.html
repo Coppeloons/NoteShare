@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>NoteShare-Notes</title>
+</head>
+<body>
+<h1>
+  NoteShare Notes
+</h1>
+<table>
+  <tr>
+    <td th:text="Id"></td>
+    <td th:text="Title"></td>
+    <td th:text="Users"></td>
+    <td th:text="Text"></td>
+  </tr>
+  <tr th:each="note: ${allNotes}">
+    <td th:text="${note.getId()}"></td>
+    <td th:text="${note.getTitle()}"></td>
+    <td th:text="${note.getUsers()}"></td>
+    <td th:text="${note.getText()}"></td>
+  </tr>
+</table>
+</body>
+</html>

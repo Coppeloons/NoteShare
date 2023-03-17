@@ -23,9 +23,9 @@ public class NoteController {
 
     @PostMapping
     void addNote(@RequestBody Note note) {
-        var copyOfCountries = Set.copyOf(note.getUsers());
+        var copyOfUsers = Set.copyOf(note.getUsers());
         note.getUsers().clear();
-        note.getUsers().addAll(userRepo.saveAll(copyOfCountries));
+        note.getUsers().addAll(userRepo.saveAll(copyOfUsers));
         noteRepo.save(note);
     }
 
