@@ -1,5 +1,7 @@
 package org.coppeloons.noteshare.controller;
 
+import org.coppeloons.noteshare.dto.NoteDto;
+import org.coppeloons.noteshare.dto.NoteMapper;
 import org.coppeloons.noteshare.entity.Note;
 import org.coppeloons.noteshare.repository.NoteRepository;
 import org.coppeloons.noteshare.repository.UserRepository;
@@ -16,9 +18,12 @@ public class NoteController {
     NoteRepository noteRepo;
     UserRepository userRepo;
 
-    public NoteController(NoteRepository noteRepo, UserRepository userRepo) {
+    NoteMapper mapper;
+
+    public NoteController(NoteRepository noteRepo, UserRepository userRepo, NoteMapper mapper) {
         this.noteRepo = noteRepo;
         this.userRepo = userRepo;
+        this.mapper = mapper;
     }
 
     @PostMapping
@@ -30,13 +35,13 @@ public class NoteController {
     }
 
     @GetMapping("/{id}")
-    Note getNote(@PathVariable Long id) {
-        return noteRepo.findById(id).orElseThrow();
+    NoteDto getNote(@PathVariable Long id) {
+        return mapper.map(noteRepo.findById(id).orElseThrow());
     }
 
     @GetMapping
-    List<Note> getAllNotes() {
-        return noteRepo.findAll();
+    List<NoteDto> getAllNotes() {
+        return mapper.map(noteRepo.findAll());
     }
 
     @DeleteMapping("/{id}")
@@ -45,15 +50,15 @@ public class NoteController {
     }
 
     @PatchMapping(path = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
-    Note updateText(@PathVariable Long id, @RequestBody String body) {
+    NoteDto updateText(@PathVariable Long id, @RequestBody String body) {
         var existingNote = noteRepo.findById(id).orElseThrow();
         existingNote.setText(body);
         noteRepo.save(existingNote);
-        return noteRepo.findById(id).orElseThrow();
+        return mapper.map(noteRepo.findById(id).orElseThrow());
     }
 
     @PatchMapping("/{id}")
-    Note updateNote(@PathVariable Long id, @RequestBody Note note) {
+    NoteDto updateNote(@PathVariable Long id, @RequestBody Note note) {
         var existingNote = noteRepo.findById(id).orElseThrow();
         if (note.getTitle() != null)
             existingNote.setTitle(note.getTitle());
@@ -62,13 +67,13 @@ public class NoteController {
         if (!note.getUsers().isEmpty())
             existingNote.setUsers(note.getUsers());
         noteRepo.save(existingNote);
-        return noteRepo.findById(id).orElseThrow();
+        return mapper.map(noteRepo.findById(id).orElseThrow());
     }
 
     @PutMapping("/{id}")
-    Note replaceNote(@PathVariable Long id, @RequestBody Note note) {
+    NoteDto replaceNote(@PathVariable Long id, @RequestBody Note note) {
         note.setId(id);
         noteRepo.save(note);
-        return noteRepo.findById(id).orElseThrow();
+        return mapper.map(noteRepo.findById(id).orElseThrow());
     }
 }
