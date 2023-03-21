@@ -2,39 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <link rel="styleSheet" href="/main.css">
   <title>NoteShare-Notes</title>
-  <link rel="styleSheet" href="/notes.css">
-
 </head>
 <body>
 <h1>
   NoteShare Notes
 </h1>
-<table>
-  <tr>
-    <td th:text="Id"></td>
-    <td th:text="Title"></td>
-  </tr>
-  <tr>
-    <td th:text="Users"></td>
-  </tr>
-  <tr>
-    <td th:text="Text"></td>
-  </tr>
-</table>
-<div class="test" th:each="note: ${allNotes}">
-  <table>
-    <tr>
-      <td th:text="${note.getId()}"></td>
-      <td th:text="${note.getTitle()}"></td>
-    </tr>
-    <tr>
-      <td th:text="${note.getUsers()}"></td>
-    </tr>
-    <tr>
-      <td th:text="${note.getText()}"></td>
-    </tr>
-  </table>
-</div>
+<article class="notes" th:each="note: ${allNotes}">
+  <h2 th:text="${note.getTitle()}"></h2>
+  <p th:text="${note.getText()}"></p>
+  <h4 th:text="${note.getUsers()}"></h4>
+</article>
 </body>
 </html>

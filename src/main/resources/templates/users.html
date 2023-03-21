@@ -2,37 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link rel="styleSheet" href="/users.css">
+  <link rel="styleSheet" href="/main.css">
   <title>NoteShare-Users</title>
 </head>
 <body>
 <h1>
   NoteShare Users
 </h1>
-<table>
-  <tr>
-    <td th:text="Id"></td>
-  </tr>
-  <tr>
-    <td th:text="Name"></td>
-  </tr>
-  <tr>
-    <td th:text="Username"></td>
-  </tr>
-</table>
-<div class="test" th:each="user: ${allUsers}">
-  <table>
-    <tr>
-      <td th:text="${user.getId()}"></td>
-    </tr>
-    <tr>
-      <td th:text="${user.getUsername()}"></td>
-    </tr>
-    <tr>
-      <td th:text="${user.getName()}"></td>
-    </tr>
-
-  </table>
-</div>
+<article class="users" th:each="user: ${allUsers}">
+  <h3 th:text="'Name: ' + ${user.getName()}"></h3>
+  <h3 th:text="'Username: ' + ${user.getUsername()}"></h3>
+  <h4 th:text="'Id: ' + ${user.getId()}"></h4>
+</article>
 </body>
 </html>

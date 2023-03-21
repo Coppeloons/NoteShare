@@ -1,0 +1,17 @@
+body {
+  background: bisque;
+}
+
+.users {
+  padding: 20px;
+  margin-top: 20px;
+  background: azure;
+  width: 500px;
+}
+
+.notes {
+  padding: 20px;
+  margin-top: 20px;
+  background: azure;
+  width: 1000px;
+}
