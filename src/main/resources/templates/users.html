@@ -11,14 +11,38 @@
 <table>
   <tr>
     <td th:text="Id"></td>
-    <td th:text="Username"></td>
+  </tr>
+  <tr>
     <td th:text="Name"></td>
   </tr>
-  <tr th:each="user: ${allUsers}">
-    <td th:text="${user.getId()}"></td>
-    <td th:text="${user.getUsername()}"></td>
-    <td th:text="${user.getName()}"></td>
+  <tr>
+    <td th:text="Usernaem"></td>
   </tr>
 </table>
+<div class="test" th:each="user: ${allUsers}">
+  <table>
+    <tr>
+      <td th:text="${user.getId()}"></td>
+    </tr>
+    <tr>
+      <td th:text="${user.getUsername()}"></td>
+    </tr>
+    <tr>
+      <td th:text="${user.getName()}"></td>
+    </tr>
+
+  </table>
+</div>
 </body>
 </html>
+<style>
+  body {
+    background: bisque;
+  }
+
+  .test {
+    padding: 20px;
+    margin-top: 20px;
+    background: azure;
+  }
+</style>
