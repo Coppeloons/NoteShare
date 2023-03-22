@@ -5,6 +5,7 @@ import org.coppeloons.noteshare.dto.NoteMapper;
 import org.coppeloons.noteshare.entity.Note;
 import org.coppeloons.noteshare.repository.NoteRepository;
 import org.coppeloons.noteshare.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,7 @@ public class NoteController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     void addNote(@RequestBody Note note) {
         var copyOfUsers = Set.copyOf(note.getUsers());
         note.getUsers().clear();
