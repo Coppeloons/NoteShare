@@ -4,6 +4,7 @@ import org.coppeloons.noteshare.dto.UserDto;
 import org.coppeloons.noteshare.dto.UserMapper;
 import org.coppeloons.noteshare.entity.User;
 import org.coppeloons.noteshare.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     void addUser(@RequestBody User user) {
         userRepo.save(user);
     }
