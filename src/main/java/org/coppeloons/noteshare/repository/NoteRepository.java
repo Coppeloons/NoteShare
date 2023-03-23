@@ -11,4 +11,6 @@ public interface NoteRepository extends ListCrudRepository<Note, Long> {
     @Override
     @EntityGraph(value = "Note.users")
     List<Note> findAll();
+
+    Note findByTitle(String title);
 }

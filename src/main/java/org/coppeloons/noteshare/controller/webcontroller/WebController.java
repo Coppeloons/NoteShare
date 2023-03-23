@@ -34,9 +34,9 @@ public class WebController {
         return "notes";
     }
 
-    @GetMapping("/viewNotes/{id}")
-    String note(Model model, @PathVariable Long id) {
-        model.addAttribute("note", noteRepo.findById(id).orElseThrow());
+    @GetMapping("/viewNotes/{title}")
+    String note(Model model, @PathVariable String title) {
+        model.addAttribute("note", noteRepo.findByTitle(title));
         return "note";
     }
 
