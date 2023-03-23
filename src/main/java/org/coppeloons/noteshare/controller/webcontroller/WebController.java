@@ -28,12 +28,6 @@ public class WebController {
         return "users";
     }
 
-    @GetMapping("/viewUsers/{id}")
-    String user(Model model, @PathVariable Long id) {
-        model.addAttribute("user", userRepo.findById(id).orElseThrow());
-        return "user";
-    }
-
     @GetMapping("/viewNotes")
     String notes(Model model) {
         model.addAttribute("allNotes", noteRepo.findAll());
@@ -58,11 +52,5 @@ public class WebController {
             }
         }
         return "notes";
-    }
-
-    @GetMapping("/viewUsers/note/{id}")
-    String userByNote(Model model, @PathVariable Long id) {
-        model.addAttribute("allUsers", noteRepo.findById(id).orElseThrow().getUsers());
-        return "users";
     }
 }
