@@ -46,10 +46,10 @@ public class WebController {
         return "note";
     }
 
-    @GetMapping("/viewNotes/user/{id}")
-    String noteByUser(Model model, @PathVariable Long id) {
+    @GetMapping("/viewNotes/user/{username}")
+    String noteByUser(Model model, @PathVariable String username) {
         var allNotes = noteRepo.findAll();
-        var user = userRepo.findById(id).orElseThrow();
+        var user = userRepo.findByUsername(username);
         List<Note> notesByUser = new ArrayList<>();
         for (Note note : allNotes) {
             if (note.getUsers().contains(user)) {
