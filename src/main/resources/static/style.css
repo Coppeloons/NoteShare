@@ -33,7 +33,7 @@ textarea {
 }
 
 button {
-  background-color: #333;
+  background-color: #111;
   padding: 0.5em 1.25em;
   color: bisque;
   border-radius: 5px;
@@ -41,10 +41,6 @@ button {
 
 button:hover {
   background-color: darkslategray;
-}
-
-body {
-  background: bisque;
 }
 
 .users {
@@ -70,11 +66,12 @@ ul {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  font: menu;
+  width: 100%;
+  display: flex;
 }
 
 li {
-  float: left;
+
 }
 
 li a {
@@ -91,4 +88,18 @@ li a:hover {
 
 .active {
   background-color: darkslategray;
+}
+
+.users {
+  padding: 20px;
+  margin-top: 20px;
+  background: azure;
+  width: 500px;
+}
+
+.notes {
+  padding: 20px;
+  margin-top: 20px;
+  background: azure;
+  width: 1000px;
 }

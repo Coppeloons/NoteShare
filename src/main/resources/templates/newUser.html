@@ -7,13 +7,18 @@
   <title>NoteShare - Create user</title>
 </head>
 <body>
-<script id="replace_with_menubar" src="/menu.js"></script>
-<form>
+<header th:insert="~{_fragments::banner}"></header>
+<form id="form">
   <h2>Create new User</h2>
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" value="">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" value="">
+  <label for="user_name">Name:</label>
+  <input type="text" id="user_name" name="name" value="">
+  <label for="user_username">Username:</label>
+  <input type="text" id="user_username" name="username" value="">
+  <label for="user_password">Password:</label>
+  <input type="password" id="user_password" name="password" value="">
+  <button type="submit">Save</button>
 </form>
+
+<script src="/newUser.js"></script>
 </body>
 </html>

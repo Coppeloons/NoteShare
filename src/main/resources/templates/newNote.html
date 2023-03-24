@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
   <title>NoteShare - New note</title>
 </head>
 <body>
-<script id="replace_with_menubar" src="/menu.js"></script>
+<header th:insert="~{_fragments::banner}"></header>
 <form id="form">
   <h2>New Note</h2>
   <label for="note_title">Title:</label>
@@ -17,6 +17,6 @@
   <button type="submit">Save</button>
 </form>
 
-<script src="/main.js"></script>
+<script src="/newNote.js"></script>
 </body>
 </html>

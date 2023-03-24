@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Title</title>
+  <style>
+
+  </style>
+</head>
+<body>
+
+<ul th:fragment="banner">
+  <li><a th:classappend="${page == 'newUser' ? 'active' : ''}" href="http://localhost:8080/newUser">New user</a></li>
+  <li><a th:classappend="${page == 'newNote' ? 'active' : ''}"  href="http://localhost:8080/newNote">New note</a></li>
+  <li><a th:classappend="${page == 'viewNotes' ? 'active' : ''}"  href="http://localhost:8080/viewNotes">View notes</a></li>
+</ul>
+
+</body>
+</html>
