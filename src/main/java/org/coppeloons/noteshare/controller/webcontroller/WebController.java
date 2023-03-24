@@ -53,4 +53,9 @@ public class WebController {
         }
         return "notes";
     }
+
+    @GetMapping("/newUser")
+    String addUser(Model model) {
+        return "newUser";
+    }
 }
