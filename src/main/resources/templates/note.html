@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <link rel="styleSheet" href="/main.css">
-  <title>NoteShare - Notes</title>
+  <title>NoteShare - Note</title>
 </head>
 <body>
-<h1>
-  NoteShare Notes
-</h1>
-<article class="notes" th:each="note: ${allNotes}">
+<article class="notes">
   <h2 th:text="${note.getTitle()}"></h2>
   <p th:text="${note.getText()}"></p>
   <h4 th:text="${note.getUsers()}"></h4>
