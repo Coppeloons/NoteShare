@@ -6,10 +6,12 @@
   <title>NoteShare - Note</title>
 </head>
 <body>
-<article class="notes">
-  <h2 th:text="${note.getTitle()}"></h2>
-  <p th:text="${note.getText()}"></p>
-  <h4 th:text="${note.getUsers()}"></h4>
-</article>
+<main>
+  <article class="notes">
+    <h2 th:text="${note.getTitle()}"></h2>
+    <p th:text="${note.getText()}"></p>
+    <h4 th:text="${note.getUsers()}"></h4>
+  </article>
+</main>
 </body>
 </html>

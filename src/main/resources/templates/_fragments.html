@@ -10,12 +10,14 @@
   </style>
 </head>
 <body>
-
-<ul th:fragment="banner">
-  <li><a th:classappend="${page == 'newUser' ? 'active' : ''}" href="http://localhost:8080/newUser">New user</a></li>
-  <li><a th:classappend="${page == 'newNote' ? 'active' : ''}"  href="http://localhost:8080/newNote">New note</a></li>
-  <li><a th:classappend="${page == 'viewNotes' ? 'active' : ''}"  href="http://localhost:8080/viewNotes">View notes</a></li>
-</ul>
+<nav th:fragment="banner">
+  <ul>
+    <li><a th:classappend="${page == 'newUser' ? 'active' : ''}" href="http://localhost:8080/newUser">New user</a></li>
+    <li><a th:classappend="${page == 'newNote' ? 'active' : ''}" href="http://localhost:8080/newNote">New note</a></li>
+    <li><a th:classappend="${page == 'viewNotes' ? 'active' : ''}" href="http://localhost:8080/viewNotes">View notes</a>
+    </li>
+  </ul>
+</nav>
 
 </body>
 </html>

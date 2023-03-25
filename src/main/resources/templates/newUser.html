@@ -8,17 +8,18 @@
 </head>
 <body>
 <header th:insert="~{_fragments::banner}"></header>
-<form id="form">
-  <h2>Create new User</h2>
-  <label for="user_name">Name:</label>
-  <input type="text" id="user_name" name="name" value="">
-  <label for="user_username">Username:</label>
-  <input type="text" id="user_username" name="username" value="">
-  <label for="user_password">Password:</label>
-  <input type="password" id="user_password" name="password" value="">
-  <button type="submit">Save</button>
-</form>
-
+<main>
+  <form id="form">
+    <h2>Create new User</h2>
+    <label for="user_name">Name:</label>
+    <input type="text" id="user_name" name="name" value="">
+    <label for="user_username">Username:</label>
+    <input type="text" id="user_username" name="username" value="">
+    <label for="user_password">Password:</label>
+    <input type="password" id="user_password" name="password" value="">
+    <button type="submit">Save</button>
+  </form>
+</main>
 <script src="/newUser.js"></script>
 </body>
 </html>

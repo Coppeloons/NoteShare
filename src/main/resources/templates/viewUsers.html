@@ -6,12 +6,12 @@
   <title>NoteShare - Users</title>
 </head>
 <body>
-<h1>
-  NoteShare Users
-</h1>
-<article class="users" th:each="user: ${allUsers}">
-  <h3 th:text="'Name: ' + ${user.getName()}"></h3>
-  <h3 th:text="'Username: ' + ${user.getUsername()}"></h3>
-</article>
+<main>
+  <h2>NoteShare Users</h2>
+  <article class="users" th:each="user: ${allUsers}">
+    <h3 th:text="'Name: ' + ${user.getName()}"></h3>
+    <h3 th:text="'Username: ' + ${user.getUsername()}"></h3>
+  </article>
+</main>
 </body>
 </html>
