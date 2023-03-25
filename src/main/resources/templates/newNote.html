@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
   <title>NoteShare - New note</title>
-  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
+<script id="replace_with_menubar" src="/menu.js"></script>
 <form id="form">
   <h2>New Note</h2>
   <label for="note_title">Title:</label>
-  <input type="text" name="note_title" id="note_title" required />
+  <input type="text" name="note_title" id="note_title" required/>
   <label for="note_text">Text:</label>
   <textarea name="note_text" id="note_text" cols="30" rows="10"></textarea>
   <button type="submit">Save</button>

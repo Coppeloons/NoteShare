@@ -33,12 +33,62 @@ textarea {
 }
 
 button {
-  background-color: black;
+  background-color: #333;
   padding: 0.5em 1.25em;
   color: bisque;
   border-radius: 5px;
 }
 
 button:hover {
+  background-color: darkslategray;
+}
+
+body {
+  background: bisque;
+}
+
+.users {
+  padding: 20px;
+  margin-top: 20px;
+  background: azure;
+  width: 500px;
+}
+
+.notes {
+  padding: 20px;
+  margin-top: 20px;
+  background: azure;
+  width: 1000px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  font: menu;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
   background-color: darkslategray;
 }
