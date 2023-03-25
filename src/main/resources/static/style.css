@@ -6,6 +6,7 @@
   --offwhite-color: azure;
   --hover-color: #253e3e;
   --button-color: #333;
+  --logo-color: #b54949;
 }
 
 body {
@@ -14,10 +15,33 @@ body {
   font-weight: 500;
   background-color: var(--primary-color);
   margin: 0;
+  position: relative;
+}
+
+header {
+  margin: 0;
+  background-color: var(--button-color);
+  position: sticky;
+  top: 0;
+}
+
+header div {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1em;
 }
 
 main {
   margin: 1em;
+}
+
+h1 {
+  margin-top: 4px;
+  margin-bottom: 0;
+  display: inline-block;
+  color: var(--logo-color);
+  font-size: 2rem;
+  font-family: fantasy;
 }
 
 h2 {
@@ -70,15 +94,9 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: var(--button-color);
-  position: sticky;
   top: 0;
   width: 100%;
   display: flex;
-}
-
-li {
-
 }
 
 li a {
