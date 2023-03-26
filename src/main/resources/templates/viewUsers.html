@@ -6,6 +6,7 @@
   <title>NoteShare - Users</title>
 </head>
 <body>
+<header th:insert="~{_fragments::banner}"></header>
 <main>
   <h2>NoteShare Users</h2>
   <article class="users" th:each="user: ${allUsers}">

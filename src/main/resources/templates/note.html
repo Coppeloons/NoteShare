@@ -6,6 +6,7 @@
   <title>NoteShare - Note</title>
 </head>
 <body>
+<header th:insert="~{_fragments::banner}"></header>
 <main>
   <article class="notes">
     <h2 th:text="${note.getTitle()}"></h2>

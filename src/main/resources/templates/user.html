@@ -6,6 +6,7 @@
   <title>NoteShare - User</title>
 </head>
 <body>
+<header th:insert="~{_fragments::banner}"></header>
 <main>
   <article class="users">
     <h3 th:text="'Name: ' + ${user.getName()}"></h3>

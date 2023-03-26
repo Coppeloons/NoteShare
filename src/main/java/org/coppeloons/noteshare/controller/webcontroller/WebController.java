@@ -24,6 +24,7 @@ public class WebController {
 
     @GetMapping("/viewUsers")
     String users(Model model) {
+        model.addAttribute("page", "users");
         model.addAttribute("allUsers", userRepo.findAll());
         return "viewUsers";
     }
@@ -55,10 +56,16 @@ public class WebController {
         return "viewNotes";
     }
 
-    @GetMapping("/newUser")
-    String addUser(Model model) {
-        model.addAttribute("page", "newUser");
-        return "newUser";
+    @GetMapping("/users/signUp")
+    String signUp(Model model) {
+        model.addAttribute("page", "signUp");
+        return "signUp";
+    }
+
+    @GetMapping("/users/login")
+    String login(Model model) {
+        model.addAttribute("page", "login");
+        return "login";
     }
 
     @GetMapping("/newNote")
