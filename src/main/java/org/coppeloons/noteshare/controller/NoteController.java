@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/notes")
@@ -31,11 +30,7 @@ public class NoteController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     void addNote(@RequestBody NoteDto2 noteDto) {
-        Note note = new Note();
-        note.setTitle(noteDto.getTitle());
-        note.setText(noteDto.getText());
-        note.setUsers(Set.of(userRepo.findById(Long.parseLong(noteDto.getAuthorId())).get()));
-        noteRepo.save(note);
+        noteRepo.save(mapper.map(noteDto, userRepo));
     }
 
     @GetMapping("/{id}")

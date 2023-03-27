@@ -44,7 +44,7 @@ h1 {
   font-family: fantasy;
 }
 
-h2 {
+h2, h2 span {
   margin-bottom: 1em;
   font-size: 1.35rem;
 }

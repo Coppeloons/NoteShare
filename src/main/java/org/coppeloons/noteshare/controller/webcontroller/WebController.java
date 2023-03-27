@@ -79,6 +79,8 @@ public class WebController {
 
     @GetMapping("/welcome")
     String welcome(Model model) {
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("username", username);
         model.addAttribute("page", "welcome");
         return "welcome";
     }
