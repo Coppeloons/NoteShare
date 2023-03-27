@@ -1,6 +1,7 @@
 package org.coppeloons.noteshare.controller;
 
 import org.coppeloons.noteshare.dto.NoteDto;
+import org.coppeloons.noteshare.dto.NoteDto2;
 import org.coppeloons.noteshare.dto.NoteMapper;
 import org.coppeloons.noteshare.entity.Note;
 import org.coppeloons.noteshare.repository.NoteRepository;
@@ -29,10 +30,11 @@ public class NoteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void addNote(@RequestBody Note note) {
-        var copyOfUsers = Set.copyOf(note.getUsers());
-        note.getUsers().clear();
-        note.getUsers().addAll(userRepo.saveAll(copyOfUsers));
+    void addNote(@RequestBody NoteDto2 noteDto) {
+        Note note = new Note();
+        note.setTitle(noteDto.getTitle());
+        note.setText(noteDto.getText());
+        note.setUsers(Set.of(userRepo.findById(Long.parseLong(noteDto.getAuthorId())).get()));
         noteRepo.save(note);
     }
 

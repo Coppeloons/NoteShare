@@ -3,6 +3,7 @@ package org.coppeloons.noteshare.controller.webcontroller;
 import org.coppeloons.noteshare.entity.Note;
 import org.coppeloons.noteshare.repository.NoteRepository;
 import org.coppeloons.noteshare.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,6 +71,8 @@ public class WebController {
 
     @GetMapping("/newNote")
     String addNote(Model model) {
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("user", userRepo.findByUsername(username));
         model.addAttribute("page", "newNote");
         return "newNote";
     }

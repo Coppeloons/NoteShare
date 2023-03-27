@@ -1,7 +1,6 @@
 package org.coppeloons.noteshare.security;
 
 import org.coppeloons.noteshare.repository.UserRepository;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +23,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         if (userCredentials == null)
             throw new UsernameNotFoundException("username not found");
 
-        UserDetails userDetails = new User(userCredentials.getUsername(), userCredentials.getPassword(), Set.of());
+        UserDetails userDetails = new UserDetail(userCredentials.getUsername(), userCredentials.getPassword(), Set.of(), userCredentials.getId());
 
         return userDetails;
     }
