@@ -5,6 +5,7 @@ import org.coppeloons.noteshare.dto.UserMapper;
 import org.coppeloons.noteshare.entity.User;
 import org.coppeloons.noteshare.repository.UserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,17 +14,25 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    UserRepository userRepo;
-    UserMapper mapper;
+    private final PasswordEncoder encoder;
+    private final UserRepository userRepo;
+    private final UserMapper mapper;
 
-    public UserController(UserRepository userRepo, UserMapper mapper) {
+    public UserController(PasswordEncoder encoder, UserRepository userRepo, UserMapper mapper) {
+        this.encoder = encoder;
         this.userRepo = userRepo;
         this.mapper = mapper;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void addUser(@RequestBody User user) {
+    void createUser(@RequestBody UserDto userDto) {
+
+        User user = new User();
+        user.setName(userDto.getName());
+        user.setUsername(userDto.getUsername());
+        user.setPassword(encoder.encode(userDto.getPassword()));
+
         userRepo.save(user);
     }
 

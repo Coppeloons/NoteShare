@@ -19,6 +19,9 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false, length = 6-24)
+    private String password;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

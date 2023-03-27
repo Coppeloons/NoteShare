@@ -73,4 +73,10 @@ public class WebController {
         model.addAttribute("page", "newNote");
         return "newNote";
     }
+
+    @GetMapping("/welcome")
+    String welcome(Model model) {
+        model.addAttribute("page", "welcome");
+        return "welcome";
+    }
 }

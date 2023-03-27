@@ -9,7 +9,7 @@
 <body>
 <header th:insert="~{_fragments::banner}"></header>
 <main>
-  <form id="form">
+  <form id="form" th:action="@{/users/login}" method="post">
     <h2>Login</h2>
     <label for="user_username">Username:</label>
     <input type="text" id="user_username" name="username" value="">
