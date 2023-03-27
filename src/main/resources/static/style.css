@@ -107,6 +107,10 @@ li a {
   text-decoration: none;
 }
 
+li {
+
+}
+
 li a:hover {
   background-color: var(--hover-color);
 }
