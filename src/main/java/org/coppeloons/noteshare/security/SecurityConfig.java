@@ -3,11 +3,7 @@ package org.coppeloons.noteshare.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -32,14 +28,9 @@ public class SecurityConfig{
                 .requestMatchers(HttpMethod.GET, "/users/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-/*
-                .formLogin()
-*/
                 .formLogin()
                 .loginPage("/users/login")
-                .defaultSuccessUrl("/welcome", true)
-        /*.loginPage("/login")*/;
-
+                .defaultSuccessUrl("/welcome", true);
         return httpSecurity.build();
     }
 
