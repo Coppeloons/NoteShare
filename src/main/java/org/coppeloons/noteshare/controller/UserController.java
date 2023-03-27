@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final PasswordEncoder encoder;
@@ -49,13 +49,6 @@ public class UserController {
     @DeleteMapping("/{id}")
     void deleteUser(@PathVariable Long id) {
         userRepo.deleteById(id);
-    }
-
-    @PutMapping("/{id}")
-    UserDto replaceUser(@PathVariable Long id, @RequestBody User user) {
-        user.setId(id);
-        userRepo.save(user);
-        return mapper.map(userRepo.findById(id).orElseThrow());
     }
 
     @PatchMapping("/{id}")
