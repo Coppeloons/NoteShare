@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="styleSheet" href="/style.css">
+  <title>NoteShare - Login</title>
+</head>
+<body>
+<header th:insert="~{_fragments::banner}"></header>
+<main>
+  <form id="form" th:action="@{/users/login}" method="post">
+    <h2>Login</h2>
+    <label for="user_username">Username:</label>
+    <input type="text" id="user_username" name="username" value="">
+    <label for="user_password">Password:</label>
+    <input type="password" id="user_password" name="password" value="">
+    <button type="submit">Login</button>
+  </form>
+</main>
+</body>
+</html>

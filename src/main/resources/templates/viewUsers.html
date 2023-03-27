@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <link rel="styleSheet" href="/style.css">
-  <title>NoteShare - Note</title>
+  <title>NoteShare - Users</title>
 </head>
 <body>
 <header th:insert="~{_fragments::banner}"></header>
 <main>
-  <article class="notes">
-    <h2 th:text="${note.getTitle()}"></h2>
-    <p th:text="${note.getText()}"></p>
-    <h4 th:text="${note.getUsers()}"></h4>
+  <h2>NoteShare Users</h2>
+  <article class="users" th:each="user: ${allUsers}">
+    <h3 th:text="'Name: ' + ${user.getName()}"></h3>
+    <h3 th:text="'Username: ' + ${user.getUsername()}"></h3>
   </article>
 </main>
 </body>

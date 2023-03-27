@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="styleSheet" href="/style.css">
+  <title>NoteShare - Sign up</title>
+</head>
+<body>
+<header th:insert="~{_fragments::banner}"></header>
+<main>
+  <form id="form">
+    <h2>Sign up</h2>
+    <label for="user_name">Name:</label>
+    <input type="text" id="user_name" name="name" value="">
+    <label for="user_username">Username:</label>
+    <input type="text" id="user_username" name="username" value="">
+    <label for="user_password">Password:</label>
+    <input type="password" id="user_password" name="password" value="">
+    <button type="submit">Save</button>
+  </form>
+</main>
+<script src="/signUp.js"></script>
+</body>
+</html>

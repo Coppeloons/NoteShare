@@ -1,15 +1,47 @@
 * {
   box-sizing: border-box;
   font-size: 16px;
+  --primary-color: #ffe4c4;
+  --secondary-color: #2f4f4f;
+  --offwhite-color: azure;
+  --hover-color: #253e3e;
+  --button-color: #333;
+  --logo-color: #b54949;
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 500;
-  background-color: bisque;
+  background-color: var(--primary-color);
   margin: 0;
-  padding: 2em;
+  position: relative;
+}
+
+header {
+  margin: 0;
+  background-color: var(--button-color);
+  position: sticky;
+  top: 0;
+}
+
+header div {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1em;
+}
+
+main {
+  margin: 1em;
+}
+
+h1 {
+  margin-top: 4px;
+  margin-bottom: 0;
+  display: inline-block;
+  color: var(--logo-color);
+  font-size: 2rem;
+  font-family: fantasy;
 }
 
 h2 {
@@ -33,12 +65,52 @@ textarea {
 }
 
 button {
-  background-color: black;
+  background-color: var(--button-color);
   padding: 0.5em 1.25em;
-  color: bisque;
+  color: var(--offwhite-color);
   border-radius: 5px;
 }
 
 button:hover {
-  background-color: darkslategray;
+  background-color: var(--hover-color);
+}
+
+.users {
+  padding: 20px;
+  margin-top: 20px;
+  background: var(--offwhite-color);
+  width: 500px;
+}
+
+.notes {
+  padding: 20px;
+  margin-top: 20px;
+  background: var(--offwhite-color);
+  width: 1000px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+  display: flex;
+}
+
+li a {
+  display: block;
+  color: var(--offwhite-color);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: var(--hover-color);
+}
+
+.active {
+  background-color: var(--secondary-color);
 }

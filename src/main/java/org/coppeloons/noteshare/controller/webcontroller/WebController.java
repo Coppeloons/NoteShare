@@ -24,14 +24,16 @@ public class WebController {
 
     @GetMapping("/viewUsers")
     String users(Model model) {
+        model.addAttribute("page", "users");
         model.addAttribute("allUsers", userRepo.findAll());
-        return "users";
+        return "viewUsers";
     }
 
     @GetMapping("/viewNotes")
     String notes(Model model) {
+        model.addAttribute("page", "viewNotes");
         model.addAttribute("allNotes", noteRepo.findAll());
-        return "notes";
+        return "viewNotes";
     }
 
     @GetMapping("/viewNotes/{title}")
@@ -51,16 +53,30 @@ public class WebController {
                 model.addAttribute("allNotes", notesByUser);
             }
         }
-        return "notes";
+        return "viewNotes";
     }
 
-    @GetMapping("/newUser")
-    String addUser(Model model) {
-        return "newUser";
+    @GetMapping("/users/signUp")
+    String signUp(Model model) {
+        model.addAttribute("page", "signUp");
+        return "signUp";
+    }
+
+    @GetMapping("/users/login")
+    String login(Model model) {
+        model.addAttribute("page", "login");
+        return "login";
     }
 
     @GetMapping("/newNote")
     String addNote(Model model) {
+        model.addAttribute("page", "newNote");
         return "newNote";
+    }
+
+    @GetMapping("/welcome")
+    String welcome(Model model) {
+        model.addAttribute("page", "welcome");
+        return "welcome";
     }
 }

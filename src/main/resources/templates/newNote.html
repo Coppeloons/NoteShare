@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
   <title>NoteShare - New note</title>
-  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-<form id="form">
-  <h2>New Note</h2>
-  <label for="note_title">Title:</label>
-  <input type="text" name="note_title" id="note_title" required />
-  <label for="note_text">Text:</label>
-  <textarea name="note_text" id="note_text" cols="30" rows="10"></textarea>
-  <button type="submit">Save</button>
-</form>
-
-<script src="/main.js"></script>
+<header th:insert="~{_fragments::banner}"></header>
+<main>
+  <form id="form">
+    <h2>New Note</h2>
+    <label for="note_title">Title:</label>
+    <input type="text" name="note_title" id="note_title" required/>
+    <label for="note_text">Text:</label>
+    <textarea name="note_text" id="note_text" cols="30" rows="10"></textarea>
+    <button type="submit">Save</button>
+  </form>
+</main>
+<script src="/newNote.js"></script>
 </body>
 </html>
