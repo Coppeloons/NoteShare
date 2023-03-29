@@ -4,6 +4,7 @@ import org.coppeloons.noteshare.dto.UserDto;
 import org.coppeloons.noteshare.dto.UserMapper;
 import org.coppeloons.noteshare.entity.User;
 import org.coppeloons.noteshare.repository.UserRepository;
+import org.coppeloons.noteshare.security.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class UserController {
         user.setName(userDto.getName());
         user.setUsername(userDto.getUsername());
         user.setPassword(encoder.encode(userDto.getPassword()));
+        user.setRole(Role.USER);
 
         userRepo.save(user);
     }
