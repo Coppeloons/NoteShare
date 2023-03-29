@@ -24,6 +24,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         if (user == null)
             throw new UsernameNotFoundException("Username not found");
 
-        return new UserDetail(user.getUsername(), user.getPassword(), Set.of(), user.getId());
+        return new UserDetail(user.getUsername(), user.getPassword(), Set.of(user.getRole()), user.getId());
     }
 }

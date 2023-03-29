@@ -28,7 +28,7 @@ public class SecurityConfig{
                 .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/signUp").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/login").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().hasAnyAuthority(Role.USER.getAuthority())
                 .and()
                 .formLogin()
                 .loginPage("/users/login")

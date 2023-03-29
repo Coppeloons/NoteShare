@@ -3,6 +3,8 @@ package org.coppeloons.noteshare.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.coppeloons.noteshare.security.Role;
+
 
 @Entity
 @Getter
@@ -21,6 +23,9 @@ public class User {
 
     @Column(nullable = false, length = 6-24)
     private String password;
+
+    @Column(nullable = false)
+    private Role role;
 
     @Override
     public boolean equals(Object o) {

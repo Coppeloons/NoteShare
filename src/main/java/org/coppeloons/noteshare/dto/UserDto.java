@@ -1,11 +1,13 @@
 package org.coppeloons.noteshare.dto;
 
+import jakarta.persistence.Column;
 import org.coppeloons.noteshare.entity.User;
 
 public class UserDto {
 
     private Long id;
     private String name;
+    @Column(unique = true)
     private String username;
     private String password;
 
