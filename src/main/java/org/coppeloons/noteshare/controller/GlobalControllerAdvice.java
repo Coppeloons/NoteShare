@@ -27,7 +27,4 @@ public class GlobalControllerAdvice {
         return "Bad request - could not execute statement";
     }
 
-
-
-
 }
