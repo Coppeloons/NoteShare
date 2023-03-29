@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style/style.css">
   <title>Title</title>
 </head>
 <body>
@@ -22,14 +22,22 @@
       </li>
     </ul>
   </nav>
-  <nav>
-    <ul>
-      <li><a href="http://localhost:8080/users/signUp">Sign up</a>
-      </li>
-      <li><a href="http://localhost:8080/users/login">Login</a>
-      </li>
-    </ul>
+  <nav th:insert="${logged_in} ? ~{_fragments::logged_in} : ~{_fragments::not_logged_in}">
   </nav>
 </div>
+
+<ul th:fragment="not_logged_in">
+  <li><a href="http://localhost:8080/users/signUp">Sign up</a>
+  </li>
+  <li><a href="http://localhost:8080/users/login">Login</a>
+  </li>
+</ul>
+<ul th:fragment="logged_in">
+  <li> <a href="#" th:text="'Logged in as: ' + ${username}"></a>
+  </li>
+  <li><a href="http://localhost:8080/logout">Log out</a>
+  </li>
+</ul>
+
 </body>
 </html>

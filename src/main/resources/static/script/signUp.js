@@ -5,7 +5,7 @@ form.addEventListener("submit", (e) => {
 
   const body = packData();
 
-  fetch("http://localhost:8080/notes", {
+  fetch("http://localhost:8080/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -17,11 +17,13 @@ form.addEventListener("submit", (e) => {
 });
 
 function packData() {
-  const title = document.getElementById("note_title");
-  const text = document.getElementById("note_text");
+  const name = document.getElementById("user_name");
+  const username = document.getElementById("user_username");
+  const password = document.getElementById("user_password");
 
   return {
-    title: title.value,
-    text: text.value
+    name: name.value,
+    username: username.value,
+    password: password.value
   };
 }
