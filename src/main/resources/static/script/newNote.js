@@ -5,7 +5,7 @@ form.addEventListener("submit", (e) => {
 
   const body = packData();
 
-  fetch("http://localhost:8080/notes", {
+  fetch("http://localhost:8080/api/notes", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

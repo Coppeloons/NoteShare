@@ -27,4 +27,13 @@ public class GlobalControllerAdvice {
         return "Bad request - could not execute statement";
     }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(value = Exception.class)
+    String handleException(Exception e) {
+
+        return e.getClass().getName();
+    }
+
+
+
 }

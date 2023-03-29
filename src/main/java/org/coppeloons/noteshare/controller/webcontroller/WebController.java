@@ -54,8 +54,14 @@ public class WebController {
         return "note";
     }
 
-    @GetMapping("/viewNotes/user/{username}")
+    @GetMapping("/{username}/viewNotes")
     String noteByUser(Model model, @PathVariable String username) {
+        var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("username", loggedInUsername);
+        model.addAttribute("logged_in", true);
+
+        if (!loggedInUsername.equalsIgnoreCase(username))
+            return "notAllowed";
         var allNotes = noteRepo.findAll();
         var user = userRepo.findByUsername(username);
         List<Note> notesByUser = new ArrayList<>();
@@ -65,8 +71,6 @@ public class WebController {
                 model.addAttribute("allNotes", notesByUser);
             }
         }
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("logged_in", true);
         return "viewNotes";
     }
 
@@ -105,9 +109,9 @@ public class WebController {
     }
 
     @GetMapping("/logout")
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/users/login?logout";
