@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/notes")
+@RequestMapping("/api/notes")
 public class NoteController {
 
     NoteRepository noteRepo;
@@ -63,16 +63,7 @@ public class NoteController {
             existingNote.setTitle(note.getTitle());
         if (note.getText() != null)
             existingNote.setText(note.getText());
-        if (!note.getUsers().isEmpty())
-            existingNote.setUsers(note.getUsers());
         noteRepo.save(existingNote);
-        return mapper.map(noteRepo.findById(id).orElseThrow());
-    }
-
-    @PutMapping("/{id}")
-    NoteDto replaceNote(@PathVariable Long id, @RequestBody Note note) {
-        note.setId(id);
-        noteRepo.save(note);
         return mapper.map(noteRepo.findById(id).orElseThrow());
     }
 }
