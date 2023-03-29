@@ -17,13 +17,15 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf()
+                .ignoringRequestMatchers("/api/users")
                 .ignoringRequestMatchers("/users/**")
                 .ignoringRequestMatchers("/notes")
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/style.css").permitAll()
+                .requestMatchers("/style/**").permitAll()
+                .requestMatchers("/script/**").permitAll()
                 .requestMatchers("/error").permitAll()
-                .requestMatchers(HttpMethod.POST, "/users/signUp").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/signUp").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/login").permitAll()
                 .anyRequest().authenticated()
