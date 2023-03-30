@@ -38,10 +38,10 @@ public class WebController {
 
     @GetMapping("/viewNotes")
     String notes(Model model) {
+        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("logged_in", true);
         model.addAttribute("page", "viewNotes");
         model.addAttribute("allNotes", noteRepo.findAll());
-        model.addAttribute("logged_in", true);
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
         return "viewNotes";
     }
 
@@ -50,7 +50,6 @@ public class WebController {
         model.addAttribute("note", noteRepo.findByTitle(title));
         model.addAttribute("logged_in", true);
         model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
-
         return "note";
     }
 
@@ -61,7 +60,7 @@ public class WebController {
         model.addAttribute("logged_in", true);
 
         if (!loggedInUsername.equalsIgnoreCase(username))
-            return "notAllowed";
+            return "error/403";
         var allNotes = noteRepo.findAll();
         var user = userRepo.findByUsername(username);
         List<Note> notesByUser = new ArrayList<>();
