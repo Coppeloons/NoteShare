@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.coppeloons.noteshare.security.Role.ADMIN;
+
 @Configuration
 public class SecurityConfig {
 
@@ -22,7 +24,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/notes").authenticated()
-                .anyRequest().authenticated()
+                .anyRequest().hasAuthority(ADMIN.getAuthority())
                 .and()
                 .httpBasic()
                 .and()
@@ -32,17 +34,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChainForWeb(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf()
-                .ignoringRequestMatchers("/users/**")
-                .ignoringRequestMatchers("/notes")
-                .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/style/**").permitAll()
                 .requestMatchers("/script/**").permitAll()
                 .requestMatchers("/error").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/signUp").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/login").permitAll()
-                .anyRequest().hasAuthority(Role.USER.getAuthority())
+                .requestMatchers(HttpMethod.GET, "/welcome").authenticated()
+                .requestMatchers(HttpMethod.GET, "/newNote").authenticated()
+                .requestMatchers(HttpMethod.GET, "/*/viewNotes").authenticated()
+                .requestMatchers(HttpMethod.GET, "/viewUsers").authenticated()
+                .requestMatchers(HttpMethod.GET, "/logout").permitAll()
+                .anyRequest().hasAuthority(ADMIN.getAuthority())
                 .and()
                 .formLogin()
                 .loginPage("/users/login")
