@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/newNote").authenticated()
                 .requestMatchers(HttpMethod.GET, "/*/viewNotes").authenticated()
                 .requestMatchers(HttpMethod.GET, "/viewUsers").authenticated()
+                .requestMatchers(HttpMethod.GET, "/viewNotes/*").authenticated()
                 .requestMatchers(HttpMethod.GET, "/logout").permitAll()
                 .anyRequest().hasAuthority(ADMIN.getAuthority())
                 .and()

@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.coppeloons.noteshare.entity.Note;
 import org.coppeloons.noteshare.repository.NoteRepository;
 import org.coppeloons.noteshare.repository.UserRepository;
+import org.coppeloons.noteshare.security.Role;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -47,9 +48,14 @@ public class WebController {
 
     @GetMapping("/viewNotes/{title}")
     String note(Model model, @PathVariable String title) {
+        var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        var user = userRepo.findByUsername(loggedInUsername);
+        var note = noteRepo.findByTitle(title);
+        if (!note.getUsers().contains(user) || user.getRole() != Role.ADMIN)
+            return "error/403";
         model.addAttribute("note", noteRepo.findByTitle(title));
         model.addAttribute("logged_in", true);
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("username", loggedInUsername);
         return "note";
     }
 

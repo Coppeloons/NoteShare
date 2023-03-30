@@ -9,11 +9,15 @@
 <header th:insert="~{_fragments::banner}"></header>
 <main>
   <h2>NoteShare Notes</h2>
-  <article class="notes" th:each="note: ${allNotes}">
-    <h2 th:text="${note.getTitle()}"></h2>
-    <p th:text="${note.getText()}"></p>
-    <h4 th:text="${note.getUsers()}"></h4>
-  </article>
+  <a class="note_link" th:each="note: ${allNotes}"
+     th:href="@{http://localhost:8080/viewNotes/{title}(title = ${note.getTitle()})}">
+    <article class="notes">
+      <h2 th:text="${note.getTitle()}"></h2>
+      <p th:text="${note.getText().length() < 40 ? note.getText() : note.getText().substring(0, 40) +'...'}"></p>
+      <h4 th:text="${note.getUsers()}"></h4>
+    </article>
+  </a>
+
 </main>
 </body>
 </html>
