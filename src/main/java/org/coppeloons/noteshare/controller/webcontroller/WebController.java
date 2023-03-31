@@ -51,12 +51,14 @@ public class WebController {
         var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
         var user = userRepo.findByUsername(loggedInUsername);
         var note = noteRepo.findByTitle(title);
-        if (!note.getUsers().contains(user) || user.getRole() != Role.ADMIN)
-            return "error/403";
-        model.addAttribute("note", noteRepo.findByTitle(title));
-        model.addAttribute("logged_in", true);
-        model.addAttribute("username", loggedInUsername);
-        return "note";
+
+        if (note.getUsers().contains(user) || user.getRole() == Role.ADMIN) {
+            model.addAttribute("note", noteRepo.findByTitle(title));
+            model.addAttribute("logged_in", true);
+            model.addAttribute("username", loggedInUsername);
+            return "note";
+        }
+        return "error/403";
     }
 
     @GetMapping("/{username}/viewNotes")
@@ -65,18 +67,19 @@ public class WebController {
         model.addAttribute("username", loggedInUsername);
         model.addAttribute("logged_in", true);
 
-        if (!loggedInUsername.equalsIgnoreCase(username))
-            return "error/403";
-        var allNotes = noteRepo.findAll();
-        var user = userRepo.findByUsername(username);
-        List<Note> notesByUser = new ArrayList<>();
-        for (Note note : allNotes) {
-            if (note.getUsers().contains(user)) {
-                notesByUser.add(note);
-                model.addAttribute("allNotes", notesByUser);
+        if (loggedInUsername.equalsIgnoreCase(username) || userRepo.findByUsername(loggedInUsername).getRole() == Role.ADMIN) {
+            var allNotes = noteRepo.findAll();
+            var user = userRepo.findByUsername(username);
+            List<Note> notesByUser = new ArrayList<>();
+            for (Note note : allNotes) {
+                if (note.getUsers().contains(user)) {
+                    notesByUser.add(note);
+                    model.addAttribute("allNotes", notesByUser);
+                }
             }
+            return "viewNotes";
         }
-        return "viewNotes";
+        return "error/403";
     }
 
     @GetMapping("/users/signUp")
