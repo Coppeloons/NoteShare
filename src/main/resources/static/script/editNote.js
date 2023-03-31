@@ -1,6 +1,7 @@
 const delete_btn = document.getElementById("delete_button");
 const note_id_element = document.getElementById("note_id");
 const form = document.getElementById("form");
+const text = document.getElementById("note_text");
 
 const url = "http://localhost:8080/api/notes/" + note_id_element.value;
 
@@ -23,7 +24,7 @@ delete_btn.addEventListener("click", (e) => {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const body = packData();
+    const body = {text: text.value};
 
     fetch(url, {
         method: "PATCH",
@@ -38,11 +39,3 @@ form.addEventListener("submit", (e) => {
             }
         ).catch((err) => console.log(err));
 });
-
-function packData() {
-    const text = document.getElementById("note_text");
-
-    return {
-        text: text.value
-    };
-}

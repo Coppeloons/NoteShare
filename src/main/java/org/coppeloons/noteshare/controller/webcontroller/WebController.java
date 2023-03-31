@@ -56,6 +56,7 @@ public class WebController {
             model.addAttribute("note", noteRepo.findByTitle(title));
             model.addAttribute("logged_in", true);
             model.addAttribute("username", loggedInUsername);
+            model.addAttribute("allUsernames", userRepo.findAllUsernames());
             return "note";
         }
         return "error/403";

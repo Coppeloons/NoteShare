@@ -23,6 +23,8 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/users/*").authenticated()
+                .requestMatchers(HttpMethod.PATCH, "/api/users/*").authenticated()
                 .requestMatchers(HttpMethod.POST, "/api/notes").authenticated()
                 .requestMatchers(HttpMethod.DELETE, "/api/notes/*").authenticated()
                 .requestMatchers(HttpMethod.PATCH, "/api/notes/*").authenticated()

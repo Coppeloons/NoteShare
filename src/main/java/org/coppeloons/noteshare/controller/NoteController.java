@@ -51,7 +51,7 @@ public class NoteController {
         var user = userRepo.findByUsername(loggedInUsername);
         var note = noteRepo.findById(id).orElseThrow();
 
-        if (note.getUsers().contains(user) || userRepo.findByUsername(loggedInUsername).getRole() == Role.ADMIN)
+        if (note.getUsers().contains(user) || user.getRole() == Role.ADMIN)
             noteRepo.deleteById(id);
     }
 
@@ -70,6 +70,8 @@ public class NoteController {
             existingNote.setTitle(note.getTitle());
         if (note.getText() != null)
             existingNote.setText(note.getText());
+        if (!note.getUsers().isEmpty())
+            existingNote.setUsers(note.getUsers());
         noteRepo.save(existingNote);
         return mapper.map(noteRepo.findById(id).orElseThrow());
     }

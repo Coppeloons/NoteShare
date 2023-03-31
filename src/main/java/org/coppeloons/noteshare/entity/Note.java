@@ -25,6 +25,10 @@ public class Note {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
+    public String getUsersAsString() {
+        return users.toString().substring(1, users.toString().length()-1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

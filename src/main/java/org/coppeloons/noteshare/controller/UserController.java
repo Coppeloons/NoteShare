@@ -6,6 +6,7 @@ import org.coppeloons.noteshare.entity.User;
 import org.coppeloons.noteshare.repository.UserRepository;
 import org.coppeloons.noteshare.security.Role;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,17 +51,28 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     void deleteUser(@PathVariable Long id) {
-        userRepo.deleteById(id);
+        var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        var user = userRepo.findById(id).orElseThrow();
+
+        if (user.getUsername().equalsIgnoreCase(loggedInUsername) || user.getRole() == Role.ADMIN)
+            userRepo.deleteById(id);
     }
 
     @PatchMapping("/{id}")
-    UserDto updateUser(@PathVariable Long id, @RequestBody User user) {
-        var existingUser = userRepo.findById(id).orElseThrow();
-        if (user.getName() != null)
-            existingUser.setName(user.getName());
-        if (user.getUsername() != null)
-            existingUser.setUsername(user.getUsername());
-        userRepo.save(existingUser);
-        return mapper.map(userRepo.findById(id).orElseThrow());
+    UserDto updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        var user = userRepo.findById(id).orElseThrow();
+
+        if (user.getUsername().equalsIgnoreCase(loggedInUsername) || user.getRole() == Role.ADMIN) {
+
+            var existingUser = userRepo.findById(id).orElseThrow();
+            if (updatedUser.getName() != null)
+                existingUser.setName(updatedUser.getName());
+            if (updatedUser.getUsername() != null)
+                existingUser.setUsername(updatedUser.getUsername());
+            userRepo.save(existingUser);
+            return mapper.map(userRepo.findById(id).orElseThrow());
+        }
+        return null;
     }
 }

@@ -11,7 +11,7 @@
 <div th:fragment="banner">
   <h1 class="logo">NoteShare</h1>
   <nav>
-    <ul>
+    <ul class="ul">
       <li><a th:classappend="${page == 'newNote' ? 'active' : ''}" href="http://localhost:8080/newNote">New note</a>
       </li>
       <li><a th:classappend="${page == 'viewNotes' ? 'active' : ''}"
@@ -26,13 +26,13 @@
   </nav>
 </div>
 
-<ul th:fragment="not_logged_in">
+<ul class="ul" th:fragment="not_logged_in">
   <li><a href="http://localhost:8080/users/signUp">Sign up</a>
   </li>
   <li><a href="http://localhost:8080/users/login">Login</a>
   </li>
 </ul>
-<ul th:fragment="logged_in">
+<ul class="ul" th:fragment="logged_in">
   <li><a href="#" th:text="'Logged in as: ' + ${username}"></a>
   </li>
   <li><a href="http://localhost:8080/logout">Log out</a>
