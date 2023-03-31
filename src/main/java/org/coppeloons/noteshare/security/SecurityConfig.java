@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/notes").authenticated()
                 .requestMatchers(HttpMethod.DELETE, "/api/notes/*").authenticated()
+                .requestMatchers(HttpMethod.PATCH, "/api/notes/*").authenticated()
                 .anyRequest().hasAuthority(ADMIN.getAuthority())
                 .and()
                 .httpBasic()

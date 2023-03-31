@@ -6,8 +6,10 @@ import org.coppeloons.noteshare.dto.NoteMapper;
 import org.coppeloons.noteshare.entity.Note;
 import org.coppeloons.noteshare.repository.NoteRepository;
 import org.coppeloons.noteshare.repository.UserRepository;
+import org.coppeloons.noteshare.security.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +47,12 @@ public class NoteController {
 
     @DeleteMapping("/{id}")
     void deleteNote(@PathVariable Long id) {
-        noteRepo.deleteById(id);
+        var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        var user = userRepo.findByUsername(loggedInUsername);
+        var note = noteRepo.findById(id).orElseThrow();
+
+        if (note.getUsers().contains(user) || userRepo.findByUsername(loggedInUsername).getRole() == Role.ADMIN)
+            noteRepo.deleteById(id);
     }
 
     @PatchMapping(path = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
