@@ -9,7 +9,6 @@ document.addEventListener("click", (e) => {
     const users = someAnchorTag.getElementsByClassName("note_users")[0].value;
 
     const body = {title, text, users};
-    console.log(body);
 
     fetch("http://localhost:8080/api/noteHub", {
         method: "POST",
