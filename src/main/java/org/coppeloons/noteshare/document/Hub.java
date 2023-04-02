@@ -1,6 +1,5 @@
 package org.coppeloons.noteshare.document;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;

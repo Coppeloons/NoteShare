@@ -9,15 +9,20 @@
 <header th:insert="~{_fragments::banner}"></header>
 <main>
   <h2>NoteShare Notes</h2>
-  <a class="note_link" th:each="note: ${allNotes}"
-     th:href="@{http://localhost:8080/viewNotes/{title}(title = ${note.getTitle()})}">
-    <article class="notes">
+  <article class="notes" th:each="note: ${allNotes}">
+
+    <a class="note_link" th:href="@{http://localhost:8080/viewNotes/{title}(title = ${note.getTitle()})}">
       <h2 th:text="${note.getTitle()}"></h2>
       <p th:text="${note.getText().length() < 40 ? note.getText() : note.getText().substring(0, 40) +'...'}"></p>
       <h4 th:text="${note.getUsers()}"></h4>
-    </article>
-  </a>
+      <input type="hidden" class="note_title" th:value="${note.getTitle()}">
+      <input type="hidden" class="note_text" th:value="${note.getText()}">
+      <input type="hidden" class="note_users" th:value="${note.getUsersAsString()}">
+    </a>
+    <button class="share_button">Share on NoteHub</button>
+  </article>
 
 </main>
+<script src="/script/publishNote.js"></script>
 </body>
 </html>
