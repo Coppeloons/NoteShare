@@ -12,8 +12,14 @@
     <h2 th:text="${note.getTitle()}"></h2>
     <label for="note_text"></label>
     <textarea th:text="${note.getText()}" name="note_text" id="note_text" cols="30" rows="10"></textarea>
-    <h4 th:text="${note.getUsers()}"></h4>
+    <label for="add_users"></label>
+    <textarea id="add_users" th:text="${note.getUsersAsString()}"></textarea>
+
+
+    <h4 id="note_users" th:text="${note.getUsersAsString()}"></h4>
+
     <input type="hidden" name="note_id" id="note_id" th:value="${note.getId()}">
+    <input type="hidden" name="note_title" id="note_title" th:value="${note.getTitle()}">
     <button type="submit">Save</button>
     <button id="delete_button">Delete</button>
   </form>
