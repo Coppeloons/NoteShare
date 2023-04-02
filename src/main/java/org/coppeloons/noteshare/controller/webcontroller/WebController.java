@@ -3,6 +3,7 @@ package org.coppeloons.noteshare.controller.webcontroller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.coppeloons.noteshare.entity.Note;
+import org.coppeloons.noteshare.repository.HubRepository;
 import org.coppeloons.noteshare.repository.NoteRepository;
 import org.coppeloons.noteshare.repository.UserRepository;
 import org.coppeloons.noteshare.security.Role;
@@ -22,10 +23,12 @@ public class WebController {
 
     private final NoteRepository noteRepo;
     private final UserRepository userRepo;
+    private final HubRepository hubRepo;
 
-    public WebController(NoteRepository noteRepo, UserRepository userRepo) {
+    public WebController(NoteRepository noteRepo, UserRepository userRepo, HubRepository hubRepo) {
         this.noteRepo = noteRepo;
         this.userRepo = userRepo;
+        this.hubRepo = hubRepo;
     }
 
     @GetMapping("/viewUsers")
@@ -124,5 +127,24 @@ public class WebController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/users/login?logout";
+    }
+
+    @GetMapping("/noteHub")
+    String noteHub(Model model) {
+        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("logged_in", true);
+        model.addAttribute("page", "viewNotes");
+        model.addAttribute("allNotes", hubRepo.findAll());
+        return "noteHub";
+    }
+
+    @GetMapping("/noteHub/{title}")
+    String viewInHub(Model model, @PathVariable String title) {
+        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("logged_in", true);
+        model.addAttribute("allNotes", hubRepo.findByTitle(title));
+        model.addAttribute("page", "noteHub");
+
+        return "viewInHub";
     }
 }

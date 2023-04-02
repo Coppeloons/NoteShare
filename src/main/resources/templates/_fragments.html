@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/style/style.css">
-  <title>Title</title>
+  <title>Fragment</title>
 </head>
 <body>
 
@@ -12,10 +12,14 @@
   <h1 class="logo">NoteShare</h1>
   <nav>
     <ul class="ul">
-      <li><a th:classappend="${page == 'newNote' ? 'active' : ''}" href="http://localhost:8080/newNote">New note</a>
+      <li><a th:classappend="${page == 'newNote' ? 'active' : ''}"
+             href="http://localhost:8080/newNote">New note</a>
       </li>
       <li><a th:classappend="${page == 'viewNotes' ? 'active' : ''}"
-             th:href="@{http://localhost:8080/{username}/viewNotes(username = ${username})}">View notes</a>
+             th:href="@{http://localhost:8080/{username}/viewNotes(username = ${username})}">My notes</a>
+      </li>
+      <li><a th:classappend="${page == 'noteHub' ? 'active' : ''}"
+             href="http://localhost:8080/noteHub">NoteHub</a>
       </li>
       <li><a th:classappend="${page == 'users' ? 'active' : ''}"
              href="http://localhost:8080/viewUsers">Users</a>
