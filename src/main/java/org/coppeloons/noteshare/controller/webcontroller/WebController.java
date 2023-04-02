@@ -70,6 +70,7 @@ public class WebController {
         var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("username", loggedInUsername);
         model.addAttribute("logged_in", true);
+        model.addAttribute("page", "viewNotes");
 
         if (loggedInUsername.equalsIgnoreCase(username) || userRepo.findByUsername(loggedInUsername).getRole() == Role.ADMIN) {
             var allNotes = noteRepo.findAll();
@@ -133,7 +134,7 @@ public class WebController {
     String noteHub(Model model) {
         model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("logged_in", true);
-        model.addAttribute("page", "viewNotes");
+        model.addAttribute("page", "noteHub");
         model.addAttribute("allNotes", hubRepo.findAll());
         return "noteHub";
     }

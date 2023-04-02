@@ -14,6 +14,12 @@ public class HubDto {
         this.users = hub.getUsers();
     }
 
+    public HubDto(String title, String text, String users) {
+        this.title = title;
+        this.text = text;
+        this.users = users;
+    }
+
     public HubDto() {
     }
 

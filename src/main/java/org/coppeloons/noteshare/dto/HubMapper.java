@@ -22,7 +22,7 @@ public class HubMapper {
         Hub hub = new Hub();
         hub.setTitle(hubDto.getTitle());
         hub.setText(hubDto.getText());
-        hub.setUsers(hub.getUsers());
+        hub.setUsers(hubDto.getUsers());
         return hub;
     }
 }
