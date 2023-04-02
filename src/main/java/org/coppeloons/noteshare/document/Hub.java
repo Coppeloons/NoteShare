@@ -26,4 +26,13 @@ public class Hub {
 
     public Hub() {
     }
+
+    @Override
+    public String toString() {
+        return "Hub{" +
+                "title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                ", users='" + users + '\'' +
+                '}';
+    }
 }
