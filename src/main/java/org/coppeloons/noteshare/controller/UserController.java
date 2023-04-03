@@ -5,6 +5,7 @@ import org.coppeloons.noteshare.dto.UserMapper;
 import org.coppeloons.noteshare.entity.User;
 import org.coppeloons.noteshare.repository.UserRepository;
 import org.coppeloons.noteshare.security.Role;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +30,12 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     void createUser(@RequestBody UserDto userDto) {
+
+        for (User user : userRepo.findAll()) {
+            if (user.getUsername().equals(userDto.getUsername())) {
+                throw new DataIntegrityViolationException(userDto.getUsername());
+            }
+        }
 
         User user = new User();
         user.setName(userDto.getName());
