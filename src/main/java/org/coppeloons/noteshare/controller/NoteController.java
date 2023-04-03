@@ -55,14 +55,6 @@ public class NoteController {
             noteRepo.deleteById(id);
     }
 
-    @PatchMapping(path = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
-    NoteDto updateText(@PathVariable Long id, @RequestBody String body) {
-        var existingNote = noteRepo.findById(id).orElseThrow();
-        existingNote.setText(body);
-        noteRepo.save(existingNote);
-        return mapper.map(noteRepo.findById(id).orElseThrow());
-    }
-
     @PatchMapping("/{id}")
     NoteDto updateNote(@PathVariable Long id, @RequestBody Note note) {
         var existingNote = noteRepo.findById(id).orElseThrow();
@@ -72,6 +64,15 @@ public class NoteController {
             existingNote.setText(note.getText());
         if (!note.getUsers().isEmpty())
             existingNote.setUsers(note.getUsers());
+        noteRepo.save(existingNote);
+        return mapper.map(noteRepo.findById(id).orElseThrow());
+    }
+
+    @PatchMapping(path = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
+    NoteDto addNoteUser(@PathVariable Long id, @RequestBody String username) {
+        var existingNote = noteRepo.findById(id).orElseThrow();
+        var user = userRepo.findByUsername(username);
+        existingNote.getUsers().add(user);
         noteRepo.save(existingNote);
         return mapper.map(noteRepo.findById(id).orElseThrow());
     }

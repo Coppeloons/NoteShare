@@ -120,3 +120,14 @@ li a:hover {
   text-decoration: none;
   color: inherit;
 }
+
+.textarea {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.input {
+  border-color: transparent;
+  display: inline-block;
+  width: 7em;
+}
