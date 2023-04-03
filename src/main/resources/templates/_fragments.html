@@ -15,9 +15,7 @@
       <li><a th:classappend="${page == 'newNote' ? 'active' : ''}"
              href="http://localhost:8080/newNote">New note</a>
       </li>
-      <li><a th:classappend="${page == 'viewNotes' ? 'active' : ''}"
-             th:href="@{http://localhost:8080/{username}/viewNotes(username = ${username})}">My notes</a>
-      </li>
+      <li th:insert="${logged_in} ? ~{_fragments::username} : ~{_fragments::no_username}"></li>
       <li><a th:classappend="${page == 'noteHub' ? 'active' : ''}"
              href="http://localhost:8080/noteHub">NoteHub</a>
       </li>
@@ -36,6 +34,7 @@
   <li><a href="http://localhost:8080/users/login">Login</a>
   </li>
 </ul>
+
 <ul class="ul" th:fragment="logged_in">
   <li><a href="#" th:text="'Logged in as: ' + ${username}"></a>
   </li>
@@ -43,5 +42,10 @@
   </li>
 </ul>
 
+<a th:fragment="username" th:classappend="${page == 'viewNotes' ? 'active' : ''}"
+   th:href="@{http://localhost:8080/{username}/viewNotes(username = ${username})}">My notes</a>
+
+<a th:fragment="no_username" th:classappend="${page == 'viewNotes' ? 'active' : ''}"
+   href=http://localhost:8080/viewNotes>My notes</a>
 </body>
 </html>

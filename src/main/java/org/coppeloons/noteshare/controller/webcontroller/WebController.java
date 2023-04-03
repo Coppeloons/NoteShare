@@ -68,6 +68,11 @@ public class WebController {
     @GetMapping("/{username}/viewNotes")
     String noteByUser(Model model, @PathVariable String username) {
         var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if (!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+            model.addAttribute("logged_in", false);
+            return "error/403";
+        }
         model.addAttribute("username", loggedInUsername);
         model.addAttribute("logged_in", true);
         model.addAttribute("page", "viewNotes");
@@ -124,9 +129,8 @@ public class WebController {
     @GetMapping("/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
+        if (auth != null)
             new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
         return "redirect:/users/login?logout";
     }
 
