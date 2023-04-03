@@ -70,7 +70,6 @@ public class NoteController {
 
     @PatchMapping(path = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
     NoteDto addNoteUser(@PathVariable Long id, @RequestBody String username) {
-        System.out.println(username);
         var existingNote = noteRepo.findById(id).orElseThrow();
         var user = userRepo.findByUsername(username);
         existingNote.getUsers().add(user);
