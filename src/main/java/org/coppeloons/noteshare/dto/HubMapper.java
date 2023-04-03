@@ -29,10 +29,10 @@ public class HubMapper {
     }
 
     public Hub map(String note) {
-        final String titleRegex = "\"title\":\"([^\"]+)\"";
-        final String textRegex = "\"text\":\"([^\"]+)\"";
-        final String usersRegex = "\"users\":\"([^\"]+)\"";
-        
+        final String titleRegex = getRegex("title");
+        final String textRegex = getRegex("text");
+        final String usersRegex = getRegex("users");
+
         final Matcher titelMatcher = getPattern(titleRegex).matcher(note);
         final Matcher textMatcher = getPattern(textRegex).matcher(note);
         final Matcher usersMatcher = getPattern(usersRegex).matcher(note);
@@ -45,6 +45,10 @@ public class HubMapper {
             hub.setUsers(usersMatcher.group(1));
         }
         return hub;
+    }
+
+    private static String getRegex(String s) {
+        return "\"" + s + "\":\"([^\"]+)\"";
     }
 
     private static Pattern getPattern(String regex) {
