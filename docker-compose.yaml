@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+
+  noteshare:
+    restart: on-failure
+    build:
+      context: .
+    depends_on:
+      - mongodb
+      - mysql
+      - rabbitmq
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_PASS: password
+      MYSQL_USER: noteShare
+      MYSQL_URL: mysql:3306/noteShare
+      MONGO_URI: mongodb:27017/noteHub
+      RABBIT_USER: guest
+      RABBIT_PASS: guest
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: "5672"
+
+  mongodb:
+    image: mongo:6.0.5
+    ports:
+      - "27017:27017"
+
+  mysql:
+    image: mysql:8.0.32
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: noteShare
+      MYSQL_USER: noteShare
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: very-secret-pw
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
