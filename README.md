@@ -22,3 +22,10 @@
     <img src="https://img.shields.io/github/languages/top/coppeloons/noteshare" alt="Language workflow badge"/>
 </div>
 </section>
+
+
+# NoteShare
+NoteShare is a program designed for creating and sharing digital notes.
+It allows users to easily create notes and publish them on NoteHub. 
+Users can share their notes with others and add collaborators, 
+making it a useful tool for students, researchers, and teams.
