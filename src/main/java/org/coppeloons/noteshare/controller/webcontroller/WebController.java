@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class WebController {
@@ -33,33 +34,36 @@ public class WebController {
 
     @GetMapping("/viewUsers")
     String users(Model model) {
-        model.addAttribute("page", "users");
-        model.addAttribute("allUsers", userRepo.findAll());
-        model.addAttribute("logged_in", true);
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAllAttributes(Map.of(
+                "page", "users",
+                "logged_in", true,
+                "allUsers", userRepo.findAll(),
+                "username", getAuthUsername()));
         return "viewUsers";
     }
 
     @GetMapping("/viewNotes")
     String notes(Model model) {
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("logged_in", true);
-        model.addAttribute("page", "viewNotes");
-        model.addAttribute("allNotes", noteRepo.findAll());
+        model.addAllAttributes(Map.of(
+                "logged_in", true,
+                "page", "viewNotes",
+                "username", getAuthUsername(),
+                "allNotes", noteRepo.findAll()));
         return "viewNotes";
     }
 
     @GetMapping("/viewNotes/{title}")
     String note(Model model, @PathVariable String title) {
-        var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        var loggedInUsername = getAuthUsername();
         var user = userRepo.findByUsername(loggedInUsername);
         var note = noteRepo.findByTitle(title);
 
         if (note.getUsers().contains(user) || user.getRole() == Role.ADMIN) {
-            model.addAttribute("note", noteRepo.findByTitle(title));
-            model.addAttribute("logged_in", true);
-            model.addAttribute("username", loggedInUsername);
-            model.addAttribute("allUsernames", userRepo.findAllUsernames());
+            model.addAllAttributes(Map.of(
+                    "logged_in", true,
+                    "username", loggedInUsername,
+                    "note", noteRepo.findByTitle(title),
+                    "allUsernames", userRepo.findAllUsernames()));
             return "note";
         }
         return "error/403";
@@ -67,15 +71,16 @@ public class WebController {
 
     @GetMapping("/{username}/viewNotes")
     String noteByUser(Model model, @PathVariable String username) {
-        var loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        var loggedInUsername = getAuthUsername();
 
         if (!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
             model.addAttribute("logged_in", false);
             return "error/403";
         }
-        model.addAttribute("username", loggedInUsername);
-        model.addAttribute("logged_in", true);
-        model.addAttribute("page", "viewNotes");
+        model.addAllAttributes(Map.of(
+                "logged_in", true,
+                "page", "viewNotes",
+                "username", loggedInUsername));
 
         if (loggedInUsername.equalsIgnoreCase(username) || userRepo.findByUsername(loggedInUsername).getRole() == Role.ADMIN) {
             var allNotes = noteRepo.findAll();
@@ -108,21 +113,22 @@ public class WebController {
 
     @GetMapping("/newNote")
     String addNote(Model model) {
-        var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("user", userRepo.findByUsername(username));
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("page", "newNote");
-        model.addAttribute("logged_in", true);
+        var username = getAuthUsername();
+        model.addAllAttributes(Map.of(
+                "username", username,
+                "page", "newNote",
+                "logged_in", true,
+                "user", userRepo.findByUsername(username)));
         return "newNote";
     }
 
     @GetMapping("/welcome")
     String welcome(Model model) {
-        var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("username", userRepo.findByUsername(username));
-
-        model.addAttribute("page", "welcome");
-        model.addAttribute("logged_in", true);
+        var username = getAuthUsername();
+        model.addAllAttributes(Map.of(
+                "page", "welcome",
+                "logged_in", true,
+                "username", userRepo.findByUsername(username)));
         return "welcome";
     }
 
@@ -136,20 +142,26 @@ public class WebController {
 
     @GetMapping("/noteHub")
     String noteHub(Model model) {
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("logged_in", true);
-        model.addAttribute("page", "noteHub");
-        model.addAttribute("allNotes", hubRepo.findAll());
+        model.addAllAttributes(Map.of(
+                "logged_in", true,
+                "page", "noteHub",
+                "username", getAuthUsername(),
+                "allNotes", hubRepo.findAll()));
         return "noteHub";
     }
 
     @GetMapping("/noteHub/{title}")
     String viewInHub(Model model, @PathVariable String title) {
-        model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("logged_in", true);
-        model.addAttribute("allNotes", hubRepo.findByTitle(title));
-        model.addAttribute("page", "noteHub");
+        model.addAllAttributes(Map.of(
+                "logged_in", true,
+                "page", "noteHub",
+                "username", getAuthUsername(),
+                "allNotes", hubRepo.findByTitle(title)));
 
         return "viewInHub";
+    }
+
+    private static String getAuthUsername() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
