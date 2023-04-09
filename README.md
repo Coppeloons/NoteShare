@@ -43,7 +43,12 @@ Users can share their notes with other local user accounts and add collaborators
 ## Installation
 
 1. Clone this repository
-2. Run docker-compose.yaml
+2. Run in terminal:
+
+   `mvn package`
+
+   `docker-compose up`
+
 3. Open [localhost:8080](http://localhost:8080/) in your web browser
 4. Start creating and sharing notes with yourself!
 
