@@ -9,7 +9,9 @@
 <body>
 
 <div th:fragment="banner">
-  <h1 class="logo">NoteShare</h1>
+  <a href="http://localhost:8080/welcome">
+    <h1 class="logo">NoteShare</h1>
+  </a>
   <nav>
     <ul class="ul">
       <li><a th:classappend="${page == 'newNote' ? 'active' : ''}"
