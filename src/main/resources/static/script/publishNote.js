@@ -17,6 +17,9 @@ document.addEventListener("click", (e) => {
         },
         body: JSON.stringify(body)
     })
-        .then((res) => console.log(res))
+        .then((res) => {
+            alert("Note shared");
+            history.go();
+        })
         .catch((err) => console.log(err));
 });
